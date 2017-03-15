@@ -47,7 +47,7 @@ class mmOne extends Queue {
 
 class QPM{
 	public static void main(String[] args) {
-		mmOne line = new mmOne(1,3);
+		mmOne line = new mmOne(1,2);
 		System.out.println("La ocupación del servidor es " + line.eeL());
 	}
 }
