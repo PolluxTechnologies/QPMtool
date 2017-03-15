@@ -14,14 +14,14 @@ class Queue {
 	
 	//Medidas de desempeño
 	//double eeL; //Número promedio de entidades en el sistema en estado estable
-	double eeLq; //Número promedio de entidades esperando en el sistema en estado estable
-	double eeLs; //Número promedio de entidades siendo atendidas en el sistema en estado estable
-	double eeW; //Tiempo promedio que demora un cliente en el sistema en estado estable
-	double eeWq; //Tiempo promedio que demora un cliente esperando en el sistema en estado estable
-	double eeWs; //Tiempo promedio que demora un cliente siendo atendido en el sistema en estado estable
+	//double eeLq; //Número promedio de entidades esperando en el sistema en estado estable
+	//double eeLs; //Número promedio de entidades siendo atendidas en el sistema en estado estable
+	//double eeW; //Tiempo promedio que demora un cliente en el sistema en estado estable
+	//double eeWq; //Tiempo promedio que demora un cliente esperando en el sistema en estado estable
+	//double eeWs; //Tiempo promedio que demora un cliente siendo atendido en el sistema en estado estable
 	//double exitRate; //Tasa de salida efectiva de los clientes
 	//double util; //Utilización del servidor
-	//double pi[]; //Probabilidades en estado estable
+	//double pij; //Probabilidades en estado estable de que hayan j clientes en el sistema
 	//double cvDeparture; //Coeficiente de variación al cuadrado de los tiempos entre salidas
 	
 	//Métodos
@@ -33,21 +33,66 @@ class Queue {
 class mmOne extends Queue {
 	
 	//Constructor
-	mmOne(double l, double m){
-		setArrivalRate(l);
-		setServiceRate(m);
+	mmOne(double l, double m){//l Lambda: tasa de arribos, m Mu: tasa de servicios
+		if(l/m >=1){//Verifico estabilidad
+			throw new ArithmeticException();
+		} else {//Si el sistema es estable realizo la asignación de parámetros
+			setArrivalRate(l); //Tasa de arribos=lambda
+			setServiceRate(m); //Tasa de servicios=mu
+		}		
 	}
 	
-	//Métodos
-	double eeL(){
+	//Método cálculo de ocupación
+	double util(){
 		return arrivalRate/serviceRate;
+	}
+	
+	//Método cálculo de L
+	double eeL(){
+		return util()/(1-util());
+	}
+	
+	//Método cálculo de Lq
+	double eeLq(){
+		return Math.pow(util(), 2)/(1-util());
+	}
+	
+	//Método cálculo de Ls
+	double eeLs(){
+		return eeL()-eeLq();
+	}
+	
+	//Método cálculo de W
+	double eeW(){
+		return eeL()/arrivalRate;
+	}
+	
+	//Método cálculo de Wq
+		double eeWq(){
+			return eeLq()/arrivalRate;
+		}
+		
+	//Método cálculo de Ws
+	double eeWs(){
+		return eeLs()/arrivalRate;
+	}
+	
+	double pij(int j){
+		return Math.pow(util(),j)*(1-util());
 	}
 }
 
 
 class QPM{
 	public static void main(String[] args) {
-		mmOne line = new mmOne(1,2);
-		System.out.println("La ocupación del servidor es " + line.eeL());
+		try{//Se verifica estabilidad del sistema
+			mmOne line = new mmOne(1,3);
+		
+			System.out.println("La ocupación del servidor es " + line.util());
+			System.out.println("Ls prob en e.e. de 3 clientes en la línea es " + line.pij(3));
+		}
+		catch(ArithmeticException exc){//Si el sistema no estable devuelve un mensaje de error
+			System.out.println("El sistema no es estable. Por favor verifique los parámetros ingresados.");
+		}
 	}
 }
