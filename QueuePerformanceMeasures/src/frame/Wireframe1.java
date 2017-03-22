@@ -2,6 +2,7 @@ package frame;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 //Wireframe1 
@@ -23,7 +24,7 @@ public class Wireframe1 extends JPanel implements ActionListener{
 	JTextArea textf;
 	JButton buttonGo;
 	JRadioButton mm1RadioButton, mm1cRadioButton, mg1RadioButton, mmsRadioButton, mminftyRadioButton, mmscRadioButton, mmssRadioButton, mmrgdkkRadioButton, gg1RadioButton, ggmRadioButton;
-	JPanel radioPanel;;
+	JPanel radioPanel;
 	String ruta;
 	
 	public Wireframe1(){
@@ -117,8 +118,6 @@ public class Wireframe1 extends JPanel implements ActionListener{
 	
 	//Listen to Button
 	public void actionPerformed(ActionEvent ae){
-		
-		
 		
 	}
 
