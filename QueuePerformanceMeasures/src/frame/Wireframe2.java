@@ -146,7 +146,7 @@ public class Wireframe2 extends JPanel implements ActionListener{
 		labelsAndFields.setBackground(Color.WHITE);	
 		labelsAndFields.setPreferredSize(new Dimension(240, 190));
 		labelPanel=new JPanel();
-		labelPanel.setPreferredSize(new Dimension(15, 180));
+		labelPanel.setPreferredSize(new Dimension(25, 180));
 		labelPanel.setBackground(Color.WHITE);
 		centralPanel = new JPanel();
 		
@@ -159,6 +159,7 @@ public class Wireframe2 extends JPanel implements ActionListener{
 		
 		jfrme.add(centralPanel);
 		jfrme.add(buttonCalc);
+		jfrme.setResizable(false);
 		jfrme.setVisible(true);
 	}
 	
