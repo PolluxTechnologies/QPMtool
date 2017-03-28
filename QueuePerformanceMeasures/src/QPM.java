@@ -86,9 +86,10 @@ class mmOne extends Queue {
 class QPM{
 	public static void main(String[] args) {
 		try{//Se verifica estabilidad del sistema
-			mmOne line = new mmOne(1,3);
+			mmOne line = new mmOne(4,4);
 		
 			System.out.println("La ocupación del servidor es " + line.util());
+			System.out.println("Ws es " + line.eeWs());
 			System.out.println("Ls prob en e.e. de 3 clientes en la línea es " + line.pij(3));
 		}
 		catch(ArithmeticException exc){//Si el sistema no estable devuelve un mensaje de error
