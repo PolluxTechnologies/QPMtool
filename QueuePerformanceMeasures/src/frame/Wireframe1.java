@@ -156,7 +156,8 @@ public class Wireframe1 extends Frame implements ActionListener{
 		jfrm.add(titlePanel);
 		jfrm.add(radioPanel);
 		jfrm.add(lateralPanel);
-			
+		jfrm.setResizable(false);
+		
 		//Hace visible el Frame
 		jfrm.setVisible(true);
     }
